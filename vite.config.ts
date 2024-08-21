@@ -1,37 +1,46 @@
-import react from "@vitejs/plugin-react";
-import { resolve } from "path";
-import { defineConfig } from "vite";
-import dts from "vite-plugin-dts";
-import svg from "vite-plugin-svg";
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import { resolve } from 'path';
+import dts from 'vite-plugin-dts';
+import svg from 'vite-plugin-svg';
+import copy from 'rollup-plugin-copy';
 
-import { dependencies, peerDependencies } from "./package.json";
+import { dependencies, peerDependencies } from './package.json';
 
 export default defineConfig({
   plugins: [
     react({
-      jsxRuntime: "automatic",
+      jsxRuntime: 'automatic',
     }),
     dts({
-      include: ["src/**/*"],
+      include: ['src/**/*'],
     }),
     svg(),
+    copy({
+      targets: [
+        { src: 'styles/theme.ts', dest: 'dist/styles' } // Copy theme.ts to the dist/styles folder
+      ],
+      hook: 'writeBundle'
+    }),
   ],
   build: {
     lib: {
-      entry: resolve(__dirname, "src", "index.ts"),
-      formats: ["es", "cjs"],
-      fileName: (ext) => `index.${ext}.js`,
+      entry: resolve(__dirname, 'src', 'index.ts'),
+      formats: ['es', 'cjs'],
+      fileName: (format) => `index.${format}.js`,
     },
     rollupOptions: {
       external: [
         ...Object.keys(peerDependencies),
         ...Object.keys(dependencies),
       ],
-      output: { preserveModules: true, exports: "named" },
+      output: {
+        preserveModules: true,
+        exports: 'named',
+      },
     },
-
-    target: "esnext",
+    target: 'esnext',
     sourcemap: true,
   },
-  base: "/<REPO>/",
+  base: '/<REPO>/', // Update this if needed
 });
