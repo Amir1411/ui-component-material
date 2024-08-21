@@ -18,9 +18,9 @@ export default defineConfig({
     svg(),
     copy({
       targets: [
-        { src: 'styles/theme.ts', dest: 'dist/styles' } // Copy theme.ts to the dist/styles folder
+        { src: 'src/styles/theme.ts', dest: 'dist/styles' }
       ],
-      hook: 'writeBundle'
+      hook: 'writeBundle',
     }),
   ],
   build: {
