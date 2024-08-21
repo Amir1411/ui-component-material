@@ -2,7 +2,7 @@ import react from "@vitejs/plugin-react";
 import { resolve } from "path";
 import { defineConfig } from "vite";
 import dts from "vite-plugin-dts";
-// import svg from "vite-plugin-svg";
+import svg from "vite-plugin-svg";
 
 import { dependencies, peerDependencies } from "./package.json";
 
@@ -14,7 +14,7 @@ export default defineConfig({
     dts({
       include: ["src/**/*"],
     }),
-    // svg(),
+    svg(),
   ],
   build: {
     lib: {
