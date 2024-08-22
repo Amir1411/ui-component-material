@@ -12,6 +12,7 @@ const Template: StoryFn<CustomAutocompleteProps<{ label: string }>> = (args) => 
   const [selectedData, setSelectedData] = useState<any[]>([]);
 
   const handleChange = (event: React.SyntheticEvent<Element, Event>, newValue: any) => {
+    event.preventDefault();
     setSelectedData(newValue);
   };
 
