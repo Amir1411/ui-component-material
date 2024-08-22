@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from 'react';
 import { Meta, StoryFn } from '@storybook/react';
-import Autocomplete, { CustomAutocompleteProps } from './Autocomplete';
+import Autocomplete, { AutocompleteProps } from './Autocomplete';
 
 export default {
-  title: 'Components/Autocomplete',
+  title: 'Forms/Autocomplete',
   component: Autocomplete,
 } as Meta;
 
-const Template: StoryFn<CustomAutocompleteProps<{ label: string }>> = (args) => {
+const Template: StoryFn<AutocompleteProps<{ label: string }>> = (args) => {
   const [selectedData, setSelectedData] = useState<any[]>([]);
 
   const handleChange = (event: React.SyntheticEvent<Element, Event>, newValue: any) => {
@@ -40,4 +40,12 @@ MultipleSelect.args = {
   multiple: true,
   limitTags: 2,
   label: 'Select multiple options',
+  inputProps: {
+    size: 'medium',
+  },
+  checkboxProps: {
+    size: 'medium',
+    color: "error"
+  },
+  // size: 'small'
 };

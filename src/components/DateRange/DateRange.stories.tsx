@@ -6,7 +6,7 @@ import dayjs from 'dayjs';
 import { TextField } from '@mui/material';
 
 export default {
-  title: 'Components/DateRange',
+  title: 'Forms/DateRange',
   component: DateRangeSelectorModal,
 } as Meta;
 

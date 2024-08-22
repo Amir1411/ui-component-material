@@ -1,40 +1,61 @@
-import { Autocomplete, TextField, Checkbox, ListItemText } from '@mui/material';
-import { AutocompleteProps } from '@mui/material/Autocomplete';
+import { Autocomplete as MuiAutocomplete, ListItemText, styled } from '@mui/material';
+import { AutocompleteProps as MuiAutocompleteProps } from '@mui/material/Autocomplete';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
+import TextField, { TextFieldProps } from '../TextField';
+import Checkbox, { CheckboxProps } from '../Checkbox';
 
-// Define the type for the options
 interface Option {
   label: string;
 }
 
-// Define the props for the CustomAutocomplete component
-export interface CustomAutocompleteProps<T> extends Omit<AutocompleteProps<T, boolean, boolean, boolean>, 'renderInput' | 'renderOption'> {
+export interface AutocompleteProps<T> extends Omit<MuiAutocompleteProps<T, boolean, boolean, boolean>, 'renderInput' | 'renderOption'> {
   multiple?: boolean;
   limitTags?: number;
   label: string;
+  inputProps?: TextFieldProps,
+  checkboxProps?: CheckboxProps,
 }
 
-// Create the CustomAutocomplete component
-const CustomAutocomplete = <T extends Option>({
+const TagContainer = styled('div')(({ theme }) => ({
+  display: 'flex',
+  flexWrap: 'wrap',
+  gap: theme.spacing(1),
+  overflow: 'hidden',
+  whiteSpace: 'nowrap',
+  textOverflow: 'ellipsis',
+  maxWidth: '100%',
+}));
+
+const TagText = styled('span')(() => ({
+  display: 'inline-block',
+  maxWidth: '100%',
+  overflow: 'hidden',
+  whiteSpace: 'nowrap',
+  textOverflow: 'ellipsis',
+}));
+
+const Autocomplete = <T extends Option>({
   multiple = false,
   limitTags = 2,
   options,
+  inputProps,
+  checkboxProps,
   label,
   ...props
-}: CustomAutocompleteProps<T>) => {
+}: AutocompleteProps<T>) => {
 
   const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
   const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
   return (
-    <Autocomplete
+    <MuiAutocomplete
       {...props}
       multiple={multiple}
       limitTags={limitTags}
       options={options}
       getOptionLabel={(option) => typeof option === 'string' ? option : option.label || ''}
-      renderInput={(params) => <TextField {...params} label={label} />}
+      renderInput={(params) => <TextField {...params} label={label} {...inputProps} />}
       renderOption={(props, option, { selected }) => (
         <li {...props}>
           {multiple ? (
@@ -42,8 +63,8 @@ const CustomAutocomplete = <T extends Option>({
               <Checkbox
                 icon={icon}
                 checkedIcon={checkedIcon}
-                style={{ marginRight: 8 }}
                 checked={selected}
+                {...checkboxProps}
               />
               <ListItemText primary={option.label || ''} />
             </>
@@ -52,8 +73,22 @@ const CustomAutocomplete = <T extends Option>({
           )}
         </li>
       )}
+      renderTags={(values: T[]) => (
+       <TagContainer>
+          {values.slice(0, 2).map((value, index) => (
+            <TagText key={index}>
+              {typeof value === 'string' ? value : value.label}
+            </TagText>
+          ))}
+          {values.length > 2 && (
+            <TagText>
+              {'...'}
+            </TagText>
+          )}
+        </TagContainer>
+      )}
     />
   );
 };
 
-export default CustomAutocomplete;
+export default Autocomplete;
