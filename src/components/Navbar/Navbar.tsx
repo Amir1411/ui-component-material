@@ -22,9 +22,14 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 export interface NavbarProps {
   title: string;
   links: { label: string; href: string }[];
+  position?: "fixed" | "absolute" | "sticky" | "static" | "relative";
 }
 
-const Navbar: React.FC<NavbarProps> = ({ title, links }) => {
+const Navbar: React.FC<NavbarProps> = ({
+  title,
+  links,
+  position = "static",
+}) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
@@ -50,7 +55,7 @@ const Navbar: React.FC<NavbarProps> = ({ title, links }) => {
   );
 
   return (
-    <AppBar position="static">
+    <AppBar position={position}>
       <Toolbar>
         {isMobile && (
           <IconButton

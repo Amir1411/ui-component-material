@@ -36,6 +36,11 @@ const DataGrid: React.FC<DataGridProps> = ({
         pageSizeOptions={[pageSize]}
         checkboxSelection={checkboxSelection}
         onRowClick={onRowClick}
+        initialState={{
+          pagination: {
+            paginationModel: { pageSize, page: 0 },
+          },
+        }}
         {...props}
       />
     </div>
