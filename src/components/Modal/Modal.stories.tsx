@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Meta, StoryFn } from "@storybook/react";
-import { Modal, CustomModalProps } from "./Modal";
+import Modal, { ModalProps } from "./Modal";
 import { Button, Typography } from "@mui/material";
 
 export default {
@@ -8,7 +8,7 @@ export default {
   component: Modal,
 } as Meta;
 
-const Template: StoryFn<CustomModalProps> = (args) => {
+const Template: StoryFn<ModalProps> = (args) => {
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => setOpen(true);

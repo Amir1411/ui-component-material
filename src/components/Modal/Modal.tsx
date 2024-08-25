@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 
-export interface CustomModalProps extends Omit<MuiModalProps, "children"> {
+export interface ModalProps extends Omit<MuiModalProps, "children"> {
   title?: string;
   children: React.ReactNode;
   onClose: () => void;
@@ -30,7 +30,7 @@ const style = {
   width: "400px",
 };
 
-export const Modal: React.FC<CustomModalProps> = ({
+const Modal: React.FC<ModalProps> = ({
   title,
   children,
   onClose,
@@ -81,3 +81,5 @@ export const Modal: React.FC<CustomModalProps> = ({
     </MuiModal>
   );
 };
+
+export default Modal;
