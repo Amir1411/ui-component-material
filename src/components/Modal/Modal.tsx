@@ -8,6 +8,17 @@ import {
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  backgroundColor: "#fff",
+  boxShadow: 24,
+  p: 4,
+  borderRadius: 4,
+};
+
 export interface ModalProps extends Omit<MuiModalProps, "children"> {
   title?: string;
   children: React.ReactNode;
@@ -18,22 +29,19 @@ export interface ModalProps extends Omit<MuiModalProps, "children"> {
   backdropColor?: string;
 }
 
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  bgcolor: "background.paper",
-  boxShadow: 24,
-  p: 4,
-  borderRadius: 2,
-  width: "400px",
+const sizeMapping = {
+  xs: 300,
+  sm: 400,
+  md: 600,
+  lg: 800,
+  xl: 1000,
 };
 
 const Modal: React.FC<ModalProps> = ({
   title,
   children,
   onClose,
+  size = "md", // Default size
   isBlackBackdrop,
   isBackdropClickDisabled = false,
   backdropColor = "#000",
@@ -60,7 +68,12 @@ const Modal: React.FC<ModalProps> = ({
           : {}
       }
     >
-      <Box sx={style}>
+      <Box
+        sx={{
+          ...style,
+          width: sizeMapping[size], // Dynamic width based on the size prop
+        }}
+      >
         {title && (
           <Box
             display="flex"
