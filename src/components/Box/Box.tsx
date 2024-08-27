@@ -17,11 +17,11 @@ export interface BoxProps extends MuiBoxProps {
 
 // Create the Box component
 const Box: React.FC<BoxProps> = ({
-  padding = 2,
+  padding = 0,
   margin = 0,
   backgroundColor,
-  borderRadius = 2,
-  boxShadow = 4,
+  borderRadius = 0,
+  boxShadow = 0,
   children,
   ...rest
 }) => {

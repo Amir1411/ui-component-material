@@ -11,3 +11,4 @@ export { default as Modal } from "./Modal";
 export { default as VideoCard } from "./VideoCard";
 export { default as VideoModal } from "./VideoModal";
 export { default as Box } from "./Box";
+export { default as Typography } from "./Typography";

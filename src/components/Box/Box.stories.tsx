@@ -1,5 +1,5 @@
 import { Typography } from "@mui/material";
-import Box from "./Box";
+import Box, { BoxProps } from "./Box";
 import { Meta, StoryFn } from "@storybook/react/*";
 
 export default {
@@ -12,7 +12,7 @@ export default {
     borderRadius: { control: "number" },
     boxShadow: { control: "number" },
   },
-} as Meta<typeof Box>;
+} as Meta<BoxProps>;
 
 // Template for rendering the Box component
 const Template: StoryFn<typeof Box> = (args) => <Box {...args} />;
