@@ -8,3 +8,5 @@ export { default as Drawer } from "./Drawer";
 export { default as DataGrid } from "./DataGrid";
 export { default as IconButton } from "./IconButton";
 export { default as Modal } from "./Modal";
+export { default as VideoCard } from "./VideoCard";
+export { default as VideoModal } from "./VideoModal";
